@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Nexus Stadium Experience</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app-container">
+        <!-- Header -->
+        <header class="app-header glass-panel">
+            <div class="user-profile">
+                <img src="https://i.pravatar.cc/150?img=11" alt="User" class="avatar">
+                <div class="user-info">
+                    <span class="greeting">Hi, Alex</span>
+                    <span class="seat-info">Section 112 • Row 8 • Seat 14</span>
+                </div>
+            </div>
+            <div class="notifications">
+                <i class="fa-solid fa-bell"></i>
+                <span class="badge pulse">2</span>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main id="main-content">
+            <!-- View: Dashboard (Wait Times & Heatmap) -->
+            <section id="view-dashboard" class="view active-view">
+                <div class="section-header">
+                    <h2>Live Venue Status</h2>
+                    <p class="subtitle">Real-time crowd intelligence</p>
+                </div>
+                
+                <div class="status-card highlight-card">
+                    <div class="card-icon"><i class="fa-solid fa-fire"></i></div>
+                    <div class="card-content">
+                        <h3>Match Intensity</h3>
+                        <p>High energy • 2nd Quarter</p>
+                    </div>
+                </div>
+
+                <div class="facilities-grid" id="facilities-container">
+                    <!-- Cards will be populated by JS -->
+                </div>
+                
+                <div class="live-alerts glass-panel">
+                    <h3><i class="fa-solid fa-triangle-exclamation"></i> Live Announcements</h3>
+                    <div class="alert-item">
+                        <span class="time">14:02</span>
+                        <p>Restrooms near Gate C are currently experiencing high traffic. Please use Gate D.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- View: Order (In-Seat Delivery) -->
+            <section id="view-order" class="view">
+                <div class="section-header">
+                    <h2>Express Ordering</h2>
+                    <p class="subtitle">Delivered straight to your seat</p>
+                </div>
+
+                <div class="categories">
+                    <button class="cat-btn active">Popular</button>
+                    <button class="cat-btn">Drinks</button>
+                    <button class="cat-btn">Food</button>
+                    <button class="cat-btn">Merch</button>
+                </div>
+
+                <div class="menu-list" id="menu-container">
+                    <!-- Menu items populated by JS -->
+                </div>
+                
+                <div id="cart-summary" class="glass-panel hidden">
+                    <div class="cart-details">
+                        <span><i class="fa-solid fa-cart-shopping"></i> <span id="cart-count">0</span> items</span>
+                        <span id="cart-total">$0.00</span>
+                    </div>
+                    <button class="btn-primary" onclick="checkout()">Checkout</button>
+                </div>
+            </section>
+
+            <!-- View: Navigate (AR/Map Placeholder) -->
+            <section id="view-navigate" class="view">
+                 <div class="section-header">
+                    <h2>Smart Routing</h2>
+                    <p class="subtitle">Fastest path to your destination</p>
+                </div>
+                
+                <div class="map-container relative">
+                    <!-- Simulated Map Graphic -->
+                    <div class="map-graphic bg-gradient">
+                        <i class="fa-solid fa-map-location-dot map-icon"></i>
+                        <p>Interactive 3D Map Active</p>
+                        <div class="pulse-ring"></div>
+                    </div>
+                    
+                    <div class="quick-routes glass-panel">
+                        <h3>Quick Routes</h3>
+                        <button class="route-btn"><i class="fa-solid fa-restroom"></i> Nearest Restroom</button>
+                        <button class="route-btn"><i class="fa-solid fa-right-from-bracket"></i> Exit Route</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav glass-panel">
+            <button class="nav-item active" data-target="view-dashboard">
+                <i class="fa-solid fa-house"></i>
+                <span>Pulse</span>
+            </button>
+            <button class="nav-item" data-target="view-order">
+                <i class="fa-solid fa-burger"></i>
+                <span>Order</span>
+            </button>
+            <button class="nav-item" data-target="view-navigate">
+                <i class="fa-regular fa-compass"></i>
+                <span>Navigate</span>
+            </button>
+        </nav>
+    </div>
+
+    <!-- Custom JS -->
+    <script src="app.js"></script>
+</body>
+</html>
