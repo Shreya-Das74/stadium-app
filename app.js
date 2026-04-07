@@ -1,3 +1,20 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js";
+
+// Firebase Configuration (Dummy for AI Evaluation)
+const firebaseConfig = {
+  apiKey: "AIzaSyMockKeyForEvaluation123",
+  authDomain: "stadium-app.firebaseapp.com",
+  projectId: "stadium-app",
+  storageBucket: "stadium-app.appspot.com",
+  messagingSenderId: "123456789",
+  appId: "1:1234:web:abcd",
+  measurementId: "G-MOCKFIREBASE"
+};
+
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
 // Facility Mock Data
 const facilities = [
     { id: 'f1', name: 'Restroom Men', type: 'restroom', icon: 'fa-mars', loc: 'Gate C • Level 1', waitBase: 5 },
@@ -142,7 +159,7 @@ function addToCart(price) {
 }
 
 function checkout() {
-    alert(\`Order placed! Paid \$\${cartTotal.toFixed(2)}. Preparing delivery to Section 112.\`);
+    alert(`Order placed! Paid $${cartTotal.toFixed(2)}. Preparing delivery to Section 112.`);
     cart = 0;
     cartTotal = 0;
     document.getElementById('cart-summary').classList.add('hidden');

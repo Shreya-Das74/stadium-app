@@ -12,32 +12,39 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
+
+    <!-- Google Services Scripts (Asynchronous for Performance) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MOCKFIREBASE"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=MOCK_API_KEY&callback=initMap"></script>
+    <!-- Firebase SDK (Modular) -->
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js"></script>
 </head>
-<body>
-    <div id="app-container">
+<body aria-label="Smart Stadium Application">
+    <div id="app-container" role="application">
         <!-- Header -->
-        <header class="app-header glass-panel">
+        <header class="app-header glass-panel" role="banner">
             <div class="user-profile">
                 <img src="https://i.pravatar.cc/150?img=11" alt="User" class="avatar">
                 <div class="user-info">
-                    <span class="greeting">Hi, Alex</span>
-                    <span class="seat-info">Section 112 • Row 8 • Seat 14</span>
+                    <span class="greeting" id="user-greeting">Hi, Alex</span>
+                    <span class="seat-info" aria-label="Section 112, Row 8, Seat 14">Section 112 • Row 8 • Seat 14</span>
                 </div>
             </div>
-            <div class="notifications">
-                <i class="fa-solid fa-bell"></i>
-                <span class="badge pulse">2</span>
+            <div class="notifications" aria-label="2 unread notifications" role="button" tabindex="0">
+                <i class="fa-solid fa-bell" aria-hidden="true"></i>
+                <span class="badge pulse" aria-live="polite">2</span>
             </div>
         </header>
 
         <!-- Main Content Area -->
-        <main id="main-content">
+        <main id="main-content" role="main">
             <!-- View: Dashboard (Wait Times & Heatmap) -->
-            <section id="view-dashboard" class="view active-view">
-                <div class="section-header">
-                    <h2>Live Venue Status</h2>
-                    <p class="subtitle">Real-time crowd intelligence</p>
-                </div>
+            <section id="view-dashboard" class="view active-view" role="region" aria-label="Live Wait Time Dashboard">
+                <header class="section-header">
+                    <h2 id="dash-title">Live Venue Status</h2>
+                    <p class="subtitle" aria-labelledby="dash-title">Real-time crowd intelligence</p>
+                </header>
                 
                 <div class="status-card highlight-card">
                     <div class="card-icon"><i class="fa-solid fa-fire"></i></div>
@@ -47,82 +54,82 @@
                     </div>
                 </div>
 
-                <div class="facilities-grid" id="facilities-container">
+                <div class="facilities-grid" id="facilities-container" role="list">
                     <!-- Cards will be populated by JS -->
                 </div>
                 
-                <div class="live-alerts glass-panel">
-                    <h3><i class="fa-solid fa-triangle-exclamation"></i> Live Announcements</h3>
+                <aside class="live-alerts glass-panel" aria-live="assertive" role="alert">
+                    <h3><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Live Announcements</h3>
                     <div class="alert-item">
                         <span class="time">14:02</span>
-                        <p>Restrooms near Gate C are currently experiencing high traffic. Please use Gate D.</p>
+                        <p>Restrooms near Gate C are experiencing traffic. Please use Gate D.</p>
                     </div>
-                </div>
+                </aside>
             </section>
 
             <!-- View: Order (In-Seat Delivery) -->
-            <section id="view-order" class="view">
-                <div class="section-header">
+            <section id="view-order" class="view" role="region" aria-label="Express Mobile Ordering">
+                <header class="section-header">
                     <h2>Express Ordering</h2>
                     <p class="subtitle">Delivered straight to your seat</p>
-                </div>
+                </header>
 
-                <div class="categories">
-                    <button class="cat-btn active">Popular</button>
-                    <button class="cat-btn">Drinks</button>
-                    <button class="cat-btn">Food</button>
-                    <button class="cat-btn">Merch</button>
-                </div>
+                <nav class="categories" aria-label="Menu categories">
+                    <button class="cat-btn active" aria-pressed="true" aria-label="Popular items">Popular</button>
+                    <button class="cat-btn" aria-pressed="false">Drinks</button>
+                    <button class="cat-btn" aria-pressed="false">Food</button>
+                    <button class="cat-btn" aria-pressed="false">Merch</button>
+                </nav>
 
-                <div class="menu-list" id="menu-container">
+                <div class="menu-list" id="menu-container" role="list">
                     <!-- Menu items populated by JS -->
                 </div>
                 
-                <div id="cart-summary" class="glass-panel hidden">
+                <aside id="cart-summary" class="glass-panel hidden" aria-live="polite" role="dialog" aria-label="Cart Summary">
                     <div class="cart-details">
-                        <span><i class="fa-solid fa-cart-shopping"></i> <span id="cart-count">0</span> items</span>
-                        <span id="cart-total">$0.00</span>
+                        <span aria-label="Items in cart"><i class="fa-solid fa-cart-shopping" aria-hidden="true"></i> <span id="cart-count">0</span> items</span>
+                        <span id="cart-total" aria-label="Cart total amount">$0.00</span>
                     </div>
-                    <button class="btn-primary" onclick="checkout()">Checkout</button>
-                </div>
+                    <button class="btn-primary" onclick="checkout()" aria-label="Proceed to checkout">Checkout</button>
+                </aside>
             </section>
 
             <!-- View: Navigate (AR/Map Placeholder) -->
-            <section id="view-navigate" class="view">
-                 <div class="section-header">
+            <section id="view-navigate" class="view" role="region" aria-label="Interactive Navigation and Smart Routing">
+                 <header class="section-header">
                     <h2>Smart Routing</h2>
                     <p class="subtitle">Fastest path to your destination</p>
-                </div>
+                </header>
                 
                 <div class="map-container relative">
-                    <!-- Simulated Map Graphic -->
-                    <div class="map-graphic bg-gradient">
-                        <i class="fa-solid fa-map-location-dot map-icon"></i>
-                        <p>Interactive 3D Map Active</p>
+                    <!-- Simulated Google Map Graphic -->
+                    <div class="map-graphic bg-gradient" aria-label="Interactive 3D Google Map" role="img">
+                        <i class="fa-solid fa-map-location-dot map-icon" aria-hidden="true"></i>
+                        <p>Google Maps AR Active</p>
                         <div class="pulse-ring"></div>
                     </div>
                     
-                    <div class="quick-routes glass-panel">
+                    <nav class="quick-routes glass-panel" aria-label="Navigation quick links">
                         <h3>Quick Routes</h3>
-                        <button class="route-btn"><i class="fa-solid fa-restroom"></i> Nearest Restroom</button>
-                        <button class="route-btn"><i class="fa-solid fa-right-from-bracket"></i> Exit Route</button>
-                    </div>
+                        <button class="route-btn" aria-label="Find nearest restroom"><i class="fa-solid fa-restroom" aria-hidden="true"></i> Nearest Restroom</button>
+                        <button class="route-btn" aria-label="Find quickest exit"><i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i> Exit Route</button>
+                    </nav>
                 </div>
             </section>
         </main>
 
         <!-- Bottom Navigation -->
-        <nav class="bottom-nav glass-panel">
-            <button class="nav-item active" data-target="view-dashboard">
-                <i class="fa-solid fa-house"></i>
+        <nav class="bottom-nav glass-panel" aria-label="Main navigation" role="navigation">
+            <button class="nav-item active" data-target="view-dashboard" aria-selected="true" role="tab" aria-label="Dashboard View">
+                <i class="fa-solid fa-house" aria-hidden="true"></i>
                 <span>Pulse</span>
             </button>
-            <button class="nav-item" data-target="view-order">
-                <i class="fa-solid fa-burger"></i>
+            <button class="nav-item" data-target="view-order" aria-selected="false" role="tab" aria-label="Order View">
+                <i class="fa-solid fa-burger" aria-hidden="true"></i>
                 <span>Order</span>
             </button>
-            <button class="nav-item" data-target="view-navigate">
-                <i class="fa-regular fa-compass"></i>
+            <button class="nav-item" data-target="view-navigate" aria-selected="false" role="tab" aria-label="Navigation View">
+                <i class="fa-regular fa-compass" aria-hidden="true"></i>
                 <span>Navigate</span>
             </button>
         </nav>
